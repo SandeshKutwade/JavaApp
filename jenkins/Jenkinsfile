@@ -1,5 +1,5 @@
 pipeline{
-    agent {label 'mavenjob'}
+    agent {label 'mavennode'}
     tools {maven 'maventool'}
     stages {
         stage ('checkout') {
