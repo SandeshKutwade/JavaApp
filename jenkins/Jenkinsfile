@@ -13,9 +13,7 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-            
-        }
-        stage ('Testing') {
+         stage ('Testing') {
             steps{
                 sh "mvn test"
                 junit '**/target/surefire-reports/TEST-*.xml'
@@ -25,5 +23,7 @@ pipeline{
                     archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
                 }
                 }
-            }
+            }  
+        }
+       
     }    
