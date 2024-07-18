@@ -1,0 +1,42 @@
+pipeline{
+    agent{label "javanode"}
+    tools {maven 'maventool'}
+
+    stages{
+        stage('compile'){
+            steps{
+                sh 'mvn compile'
+            }
+        }
+        stage("test") {
+            steps{
+                sh "mvn test"
+
+            }
+        }
+        stage("Package") {
+            steps{
+                sh "mvn package"
+            }
+        }
+        stage("Deploy"){
+            steps{
+               sh label: '', script: '''rm -rf dockerimage
+            mkdir dockerimage
+            cd dockerimage
+            cp /home/ubuntu/JavaApp/workspace/JavaPipeline/target/NemoAapp-1.0-SNAPSHOT.jar .
+            touch dockerfile
+            cat <<EOT>>dockerfile
+            FROM nginx:latest
+            COPY /home/ubuntu/JavaApp/workspace/JavaPipeline/target/NemoAapp-1.0-SNAPSHOT.jar /usr/share/nginx/html/NemoAapp-1.0-SNAPSHOT.jar
+            CMD ["java","jar","NemoAapp-1.0-SNAPSHOT.jar" ]
+            EXPOSE 8080
+            EOT
+            sudo docker build -t webimage:1.0 .
+            sudo docker container run -itd --name webserver -p 8888:8080 webimage:1.0'''
+            }
+        }
+        
+        }
+}
+
