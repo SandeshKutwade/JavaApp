@@ -1,5 +1,5 @@
 pipeline{
-    agent(label "javanode")
+    agent{label "javanode"}
     tools {maven 'maventool'}
 
     stages{
