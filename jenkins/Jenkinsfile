@@ -28,8 +28,8 @@ pipeline{
             touch dockerfile
             cat <<EOT>>dockerfile
             FROM nginx:latest
-            COPY ./NemoAapp-1.0-SNAPSHOT.jar /usr/share/nginx/html/index.html
-            CMD ["dockerimage.sh", "run"]
+            COPY /home/ubuntu/JavaApp/workspace/JavaPipeline/target/NemoAapp-1.0-SNAPSHOT.jar /usr/share/nginx/html/NemoAapp-1.0-SNAPSHOT.jar
+            CMD ["java","jar","NemoAapp-1.0-SNAPSHOT.jar" ]
             EXPOSE 8080
             EOT
             sudo docker build -t webimage:1.0 .
