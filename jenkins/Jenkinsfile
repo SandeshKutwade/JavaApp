@@ -1,29 +1,23 @@
 pipeline{
-    agent {label 'mavennode'}
+    agent(label "javanode")
     tools {maven 'maventool'}
-    stages {
-        stage ('checkout') {
-            steps {
-                checkout scm
-            }
-            
-        }
-        stage ('Build'){
+
+    stages{
+        stage('compile'){
             steps{
-                sh 'mvn clean install'
+                sh 'mvn compile'
             }
         }
-         stage ('Testing') {
+        stage("test") {
             steps{
                 sh "mvn test"
-                junit '**/target/surefire-reports/TEST-*.xml'
+
             }
-            post {
-                always {
-                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-                }
-                }
-            }  
         }
-       
-    }    
+        stage{"Package"} {
+            steps{
+                sh "mvn package"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+pipeline{
+    agent {label 'mavennode'}
+    tools {maven 'maventool'}
+    stages {
+        stage ('checkout') {
+            steps {
+                checkout scm
+            }
+            
+        }
+        stage ('Build'){
+            steps{
+                sh 'mvn clean install'
+            }
+        }
+         stage ('Testing') {
+            steps{
+                sh "mvn test"
+                junit '**/target/surefire-reports/TEST-*.xml'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                }
+                }
+            }  
+        }
+       
+    }    
