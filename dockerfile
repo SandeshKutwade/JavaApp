@@ -1,5 +1,4 @@
-FROM java:7
+FROM nginx:latest
 EXPOSE 8080
-VOLUME /tmp
-ADD NemoAapp-1.0-SNAPSHOT.jar  NemoAapp.jar
-ENTRYPOINT [ "java","jar","NemoAapp.jar" ]
+COPY /home/ubuntu/JavaApp/workspace/JavaPipeline/target/NemoAapp-1.0-SNAPSHOT.jar /usr/share/nginx/html/NemoAapp-1.0-SNAPSHOT.jar
+CMD ["java","jar","NemoAapp-1.0-SNAPSHOT.jar" ]
