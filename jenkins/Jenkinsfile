@@ -18,7 +18,7 @@ pipeline{
             steps{
                 sh "mvn package"
             }
-        
+        }
         stage("Deploy"){
             steps{
                 script: '''rm -rf dockerimage
@@ -38,5 +38,4 @@ pipeline{
         }
         
         }
-    }
 }
