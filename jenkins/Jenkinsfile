@@ -1,11 +1,13 @@
 pipeline {
     agent any
 
-   tools {maven 'maventool'}
+    tools {
+        maven 'maventool'
+    }
 
     stages {
         stage('Build with Maven') {
-            steps {               
+            steps {
                 // Clean and package the application using Maven
                 sh 'mvn clean package'
             }
@@ -20,7 +22,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                // Run the Docker container
+                // Run the Docker container on a different port (e.g., 8081)
                 sh 'docker run -d -p 8081:8080 --name hello-world-app hello-world-app'
             }
         }
