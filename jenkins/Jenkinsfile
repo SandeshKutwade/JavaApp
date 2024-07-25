@@ -18,19 +18,15 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                // Run SonarQube analysis
-                withSonarQubeEnv(SONARQUBE_ENV) {
-                    sh '''
-                        mvn sonar:sonar \
-                        -Dsonar.projectKey=hello-world-app \
-                        -Dsonar.host.url=https://sonarcloud.io:9000 \
-                        -Dsonar.login=85e0a170c4e35ec5735204771fc8f4a4e07e82b5
-                    '''
-                }
-            }
-        }
+        stage('build with sonar') {
+		steps {
+			withSonarQubeEnv(credentialsId: 'sandeshkutwade123', installationName: 'SONAR_SCANNER') { // You can override the credential to be used
+				sh '/opt/maven/bin/mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -D sonar.organization=SandeshKutwade/JavaApp -D sonar.projectKey=85e0a170c4e35ec5735204771fc8f4a4e07e82b5'
+			}
+			junit testResults: '**/surefire-reports/*.xml'
+			// archive '**/target/spring-petclinic-*.jar'
+		}
+	}
 
         stage('Build Docker Image') {
             steps {
@@ -55,3 +51,24 @@ pipeline {
     //     }
     // }
 }
+
+
+
+
+
+
+
+	
+	// stage("Quality Gate") {
+	// 	steps {
+	// 		timeout(time: 1, unit: 'HOURS') {
+	// 			// Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+	// 			// true = set pipeline to UNSTABLE, false = don't
+	// 			waitForQualityGate abortPipeline: true
+	// 		}
+	// 	}
+	// }
+	
+//   }
+    
+// }
