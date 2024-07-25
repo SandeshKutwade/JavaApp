@@ -17,6 +17,6 @@ public class HelloWorldApplicationTest {
     @Test
     public void testHelloWorldEndpoint() {
         ResponseEntity<String> response = restTemplate.getForEntity("/api/hello", String.class);
-        assertThat(response.getBody()).isEqualTo("Hello, World!");
+        assertThat(response.getBody()).isEqualTo("Hello, Nemo!");
     }
 }
