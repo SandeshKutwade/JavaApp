@@ -21,8 +21,6 @@ pipeline {
                 sh 'docker run -d -p 8080:8080 --name hello-world-app hello-world-app'
             }
         }
-    }
-
     post {
         always {
             // Clean up the Docker container after the build
@@ -31,3 +29,4 @@ pipeline {
         }
     }
 }
+
