@@ -21,7 +21,7 @@ resource "aws_instance" "Jenkins_All" {
     inline = [
       "sudo chmod 777 InstallAll.sh",
       "./InstallAll.sh",
-      "touch file.txt"
+      "touch file22.txt"
     ]
 
   }
