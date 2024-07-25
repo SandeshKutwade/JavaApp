@@ -13,7 +13,7 @@ resource "aws_instance" "Jenkins_All" {
   }
 
   provisioner "file" {
-    source      = "/Users/sandeshkutwade/JavaApp/InstallAll.sh"
+    source      = "InstallAll.sh"
     destination = "/home/ubuntu/InstallAll.sh"
 
   }
