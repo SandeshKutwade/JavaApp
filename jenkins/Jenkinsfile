@@ -22,7 +22,12 @@ pipeline {
             steps {
                 // Run SonarQube analysis
                 withSonarQubeEnv(SONARQUBE_ENV) {
-                    sh 'mvn sonar:sonar'
+                    sh '''
+                        mvn sonar:sonar \
+                        -Dsonar.projectKey=hello-world-app \
+                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.login=YOUR_SONARQUBE_TOKEN
+                    '''
                 }
             }
         }
