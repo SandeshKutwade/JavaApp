@@ -28,11 +28,11 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Clean up the Docker container after the build
-            sh 'docker stop hello-world-app || true'
-            sh 'docker rm hello-world-app || true'
-        }
-    }
+    // post {
+    //     always {
+    //         // Clean up the Docker container after the build
+    //         sh 'docker stop hello-world-app || true'
+    //         sh 'docker rm hello-world-app || true'
+    //     }
+    // }
 }
