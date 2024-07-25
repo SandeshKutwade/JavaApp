@@ -8,7 +8,7 @@ resource "aws_instance" "Jenkins_All" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    host        = aws_instance.Jenkins_All.public_ip
+    host        = aws_instance.Jenkins_All[0].public_ip
     private_key = file("/Users/sandeshkutwade/JavaApp/MumbaiKey.pem")
   }
 

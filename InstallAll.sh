@@ -8,6 +8,8 @@ updatemachine(){
 }
 
 installjenkins(){
+    echo "installing jenkins"
+    sleep 5
     echo "jenkins installtion..."
     sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
   https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
@@ -19,12 +21,16 @@ installjenkins(){
 }
 
 installmaven(){
+    echo "installing maven"
+    sleep 5
     cd /tmp
     wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
     tar -xvf apache-maven-3.9.6-bin.tar.gz
     sudo mv apache-maven-3.9.6 /opt/maven
 }
 installdocker() {
+    echo "installing docker"
+    sleep 5
     curl -fsSL https://get.docker.com -o install-docker.sh
     sh install-docker.sh
     sudo chown ubuntu /var/run/docker.sock
@@ -35,3 +41,4 @@ installjenkins
 installmaven
 installdocker
 
+2582a1dac3714859ba27b1f1e2229af9
