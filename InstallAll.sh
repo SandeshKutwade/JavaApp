@@ -36,9 +36,16 @@ installdocker() {
     sudo chown ubuntu /var/run/docker.sock
 }
 
+jenkinssudo(){
+    echo "adding Jenkins to the Docker Group"
+    sudo usermod -aG docker jenkins 
+    sudo systemctl restart jenkins.service 
+}
+
+
+
 updatemachine
 installjenkins
 installmaven
 installdocker
-
-2582a1dac3714859ba27b1f1e2229af9
+jenkinssudo
