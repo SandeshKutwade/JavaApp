@@ -2,41 +2,27 @@ pipeline {
     agent any
 
     tools {
-        maven 'maventool' 
-    }
-
-    environment {
-        SONARQUBE_ENV = 'SonarCloud'
+        maven 'maventool'
     }
 
     stages {
-
         stage('Build with Maven') {
             steps {
-                // Clean and package the application using Maven
+             
                 sh 'mvn clean package'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                // Run SonarQube analysis
-                withSonarQubeEnv(SONARQUBE_ENV) {
-                    sh 'mvn sonar:sonar'
-                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                // Build the Docker image using the Dockerfile
+           
                 sh 'docker build -t hello-world-app .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                // Run the Docker container on a different port (e.g., 8081)
+              
                 sh 'docker run -d -p 8081:8080 --name hello-world-app hello-world-app'
             }
         }
