@@ -14,7 +14,7 @@ variable "numinstance" {
 
 variable "tagsvalue" {
   default = {
-    Name = "Jenkins_All"
+    Name = "Nemo_Instance"
   }
 
 }
