@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    tools {maven 'maventool'}
+   tools {maven 'maventool'}
 
     stages {
         stage('Build with Maven') {
-            steps {
+            steps {               
                 // Clean and package the application using Maven
                 sh 'mvn clean package'
             }
