@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Build with Maven') {
-            steps {
-                // Checkout the code from your version control system (e.g., Git)
-                git 'https://your-repository-url.git'
-                
+        stage('Build with Maven') {                
                 // Clean and package the application using Maven
                 sh 'mvn clean package'
             }
