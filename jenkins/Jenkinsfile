@@ -1,21 +1,37 @@
-pipeline{
-    agent{label "javanode"}
-    tools {maven 'maventool'}
+pipeline {
+    agent any
 
-    stages{
-        stage('Build'){
-            steps{
-                sh 'mvn clean install'
+    stages {
+        stage('Build with Maven') {
+            steps {
+                // Checkout the code from your version control system (e.g., Git)
+                git 'https://your-repository-url.git'
+                
+                // Clean and package the application using Maven
+                sh 'mvn clean package'
             }
         }
 
-        stage('Build docker image'){
-                agent{label "javanode"}
-                    steps{
-                        script{
-                            sh 'docker build -t JavaApp .'
-                        }
-                    }
+        stage('Build Docker Image') {
+            steps {
+                // Build the Docker image using the Dockerfile
+                sh 'docker build -t hello-world-app .'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                // Run the Docker container
+                sh 'docker run -d -p 8080:8080 --name hello-world-app hello-world-app'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up the Docker container after the build
+            sh 'docker stop hello-world-app || true'
+            sh 'docker rm hello-world-app || true'
         }
     }
 }
