@@ -20,7 +20,8 @@ resource "aws_instance" "Jenkins_All" {
   provisioner "remote-exec" {
     inline = [
       "sudo chmod 777 InstallAll.sh",
-      "./InstallAll.sh"
+      "./InstallAll.sh",
+      "touch file.txt"
     ]
 
   }
