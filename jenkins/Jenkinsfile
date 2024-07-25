@@ -2,11 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Build with Maven') {                
+        stage('Build with Maven') {
+            steps {
+                // Checkout the code from your version control system (e.g., Git)
+                git 'https://github.com/SandeshKutwade/JavaApp.git'
+                
                 // Clean and package the application using Maven
                 sh 'mvn clean package'
             }
-        
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -21,6 +25,8 @@ pipeline {
                 sh 'docker run -d -p 8080:8080 --name hello-world-app hello-world-app'
             }
         }
+    }
+
     post {
         always {
             // Clean up the Docker container after the build
@@ -28,6 +34,4 @@ pipeline {
             sh 'docker rm hello-world-app || true'
         }
     }
-    }
 }
-
