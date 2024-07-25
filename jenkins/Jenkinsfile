@@ -21,7 +21,7 @@ pipeline {
         stage('build with sonar') {
 		steps {
 			withSonarQubeEnv(credentialsId: 'sandeshkutwade123', installationName: 'SonarCloud') { 
-				sh '/opt/maven/bin/mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -D sonar.organization=SandeshKutwade/JavaApp -D sonar.projectKey=85e0a170c4e35ec5735204771fc8f4a4e07e82b5'
+				sh '/opt/maven/bin/mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -D sonar.organization=sandeshkutwade123 -D sonar.projectKey=85e0a170c4e35ec5735204771fc8f4a4e07e82b5'
 			}
 			junit testResults: '**/surefire-reports/*.xml'
 			// archive '**/target/spring-petclinic-*.jar'
