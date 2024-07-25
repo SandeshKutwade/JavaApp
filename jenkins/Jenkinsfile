@@ -4,9 +4,6 @@ pipeline {
     stages {
         stage('Build with Maven') {
             steps {
-                // Checkout the code from your version control system (e.g., Git)
-                git 'https://github.com/SandeshKutwade/JavaApp.git'
-                
                 // Clean and package the application using Maven
                 sh 'mvn clean package'
             }
