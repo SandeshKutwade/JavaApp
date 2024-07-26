@@ -43,17 +43,18 @@ pipeline {
                 sh 'docker run -d -p 8081:8080 --name hello-world-app hello-world-app'
             }
         }
-    }
         stage('Push Docker Image to Docker Hub') {
-                steps {
-                    script {
-                        docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-                            sh "docker tag hello-world-app ${DOCKER_IMAGE}"
-                            sh "docker push ${DOCKER_IMAGE}"
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                        sh "docker tag hello-world-app ${DOCKER_IMAGE}"
+                        sh "docker push ${DOCKER_IMAGE}"
                         }
                     }
                 }
             }
+    }
+       
 
     // post {
     //     always {
