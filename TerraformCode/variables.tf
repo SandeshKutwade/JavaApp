@@ -19,6 +19,6 @@ variable "type" {
 
 variable "tags" {
   default = {
-    Nmae = "Docker_Instance"
+    Name = "Docker_Instance"
   }
 }
