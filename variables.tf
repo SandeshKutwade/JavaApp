@@ -18,5 +18,8 @@ variable "tagsvalue" {
   }
 
 }
-
+variable "s3bpucketnamet" {
+  description = "Provide bucket name for s3"
+  
+}
 
