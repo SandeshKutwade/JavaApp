@@ -27,29 +27,29 @@ resource "aws_instance" "Jenkins_All" {
   }
 }
 
-resource "aws_s3_bucket" "state_bucket" {
-  bucket = var.s3bpucketnamet
-  tags = {
-    Name = var.s3bpucketnamet
-    Env = "Development"
-  }
+# resource "aws_s3_bucket" "state_bucket" {
+#   bucket = var.s3bpucketnamet
+#   tags = {
+#     Name = var.s3bpucketnamet
+#     Env = "Development"
+#   }
   
-}
+# }
 
-resource "aws_dynamodb_table" "state_table" {
-  name = "Terrafrom_State"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key = "LockID"
-  attribute {
-      name = "LockID"
-      type = "S"
-    }
-  depends_on = [ aws_s3_bucket.state_bucket ]
-}
+# resource "aws_dynamodb_table" "state_table" {
+#   name = "Terrafrom_State"
+#   billing_mode = "PAY_PER_REQUEST"
+#   hash_key = "LockID"
+#   attribute {
+#       name = "LockID"
+#       type = "S"
+#     }
+#   depends_on = [ aws_s3_bucket.state_bucket ]
+# }
 
 # terraform {
 #   backend "s3" {
-#     bucket = "terraformbucket_itsme"
+#     bucket = "terraform-bucket-itsme"
 #     key = "Terraform/state/file"
 #     encrypt = false
 #     dynamodb_table = "Terrafrom_State"
