@@ -14,7 +14,7 @@ variable "numinstance" {
 
 variable "tagsvalue" {
   default = {
-    Name = "Nemo_Instance"
+    Name = "CI-CD"
   }
 
 }
