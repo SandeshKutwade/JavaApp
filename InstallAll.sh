@@ -41,6 +41,9 @@ jenkinssudo(){
     sudo usermod -aG docker jenkins 
     sudo systemctl restart jenkins.service 
 }
+dockerlogin(){
+    echo "$password" | docker login -u "$username" --password-stdin
+}
 
 
 
@@ -49,3 +52,4 @@ installjenkins
 installmaven
 installdocker
 jenkinssudo
+dockerlogin
